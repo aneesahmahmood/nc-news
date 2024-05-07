@@ -1,16 +1,28 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import getSingleArticle from "../../utils/get-single-article";
+import { useNavigate } from "react-router-dom";
 
 function Articles() {
   const { articleId } = useParams();
-  const [article, setArtical] = useState({});
+  const [article, setArticle] = useState({});
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getSingleArticle(articleId).then((response) => {
-      setArtical(response.data);
+      setIsLoading(false);
+      setArticle(response.data);
     });
   }, [articleId]);
+
+  if (isLoading) {
+    return <p>loading...</p>;
+  }
+
+  const handleClick = (articleId) => {
+    navigate(`/articles/${articleId}/comments`);
+  };
 
   return (
     <div className="container">
@@ -32,10 +44,15 @@ function Articles() {
         {article.body}
         <br />
         <br />
-        Comments: {article.comment_count}
+        <div
+          className="commentsButton"
+          onClick={() => handleClick(article.article_id)}
+        >
+          Comments: {article.comment_count}
+        </div>
         <br />
         <br />
-        Created at: {article.created_at}
+        Created at: {new Date(article.created_at).toDateString()}
         <br />
         <br />
         Votes: {article.votes}
