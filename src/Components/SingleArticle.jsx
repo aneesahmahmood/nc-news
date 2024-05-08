@@ -1,13 +1,15 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import getSingleArticle from "../../utils/get-single-article";
 import { useNavigate } from "react-router-dom";
+import patchVotes from "../../utils/vote-on-articles";
 
-function Articles() {
+function SingleArticle() {
   const { articleId } = useParams();
   const [article, setArticle] = useState({});
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
+  const [voteChange, setVoteChange] = useState("");
 
   useEffect(() => {
     getSingleArticle(articleId).then((response) => {
@@ -24,12 +26,19 @@ function Articles() {
     navigate(`/articles/${articleId}/comments`);
   };
 
+  const handleVote = (vote) => {
+    patchVotes(articleId, vote).then((data) => {
+      setArticle(data.article);
+      setVoteChange(true);
+    });
+  };
+
   return (
     <div className="container">
       <div className="singleArticle">
-        <a href="http://localhost:5173/articles">
+        <Link to="/articles">
           <button>Return to Home</button>
-        </a>
+        </Link>
         <h2>{article.title}</h2>
         <img src={article.article_img_url} className="img" />
         <br />
@@ -55,11 +64,19 @@ function Articles() {
         Created at: {new Date(article.created_at).toDateString()}
         <br />
         <br />
-        Votes: {article.votes}
+        <button disabled={voteChange === true} onClick={() => handleVote(1)}>
+          {" "}
+          +
+        </button>
+        <p>Votes: {article.votes}</p>
+        <button disabled={voteChange === true} onClick={() => handleVote(-1)}>
+          {" "}
+          -
+        </button>
         <br />
       </div>
     </div>
   );
 }
 
-export default Articles;
+export default SingleArticle;
