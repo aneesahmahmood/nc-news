@@ -9,9 +9,6 @@ function NavBar() {
       <NavLink to="/topics" className="navLink">
         Topics
       </NavLink>
-      <NavLink to="/comments" className="navLink">
-        Comments
-      </NavLink>
     </nav>
   );
 }
