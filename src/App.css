@@ -121,8 +121,9 @@ button,
 }
 
 .homeButtonComment {
-  border: solid;
   margin: 0;
+  width: auto;
+  height: auto;
 }
 
 button:hover {
@@ -131,4 +132,38 @@ button:hover {
 
 li:hover {
   cursor: pointer;
+}
+
+.commentform {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 20px;
+}
+
+.commentform label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.commentform input[type="text"],
+.commentform textarea {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 300px;
+  font-family: sans-serif;
+  color: #91c6c9;
+}
+
+.commentform button {
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }

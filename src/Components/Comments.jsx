@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import getCommentsById from "../../utils/get-comments-by-id";
 import { useParams, Link } from "react-router-dom";
+import AddComment from "./AddComment";
 
 function Comments() {
   const { articleId } = useParams();
@@ -36,12 +37,13 @@ function Comments() {
         <Link to="/articles" className="homeButtonComment">
           <button>Return to Home</button>
         </Link>
+
         <ul className="comments-container">
           {comments.map((comment) => (
             <li key={comment.comment_id}>
               <div className="comments">
                 <br />
-                {comment.author}
+                Author: {comment.author}
                 <br />
                 Article ID: {comment.article_id}
                 <br />
@@ -55,6 +57,7 @@ function Comments() {
             </li>
           ))}
         </ul>
+        <AddComment articleId={articleId} />
       </>
     );
   }
