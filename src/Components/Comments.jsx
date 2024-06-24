@@ -17,7 +17,9 @@ function Comments() {
   }, [articleId]);
 
   const handleDeleteComment = (comment_id) => {
-    setComments(comments.filter((comment) => comment.comment_id !== comment_id));
+    setComments(
+      comments.filter((comment) => comment.comment_id !== comment_id)
+    );
   };
 
   if (isLoading) {

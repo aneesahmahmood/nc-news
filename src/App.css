@@ -1,67 +1,120 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .header {
-  background-color: #91c6c9;
+  background-color: #52796f;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+  font-family: "Playfair Display", serif;
 }
 
 .nav {
-  background-color: #91c6c9;
+  background-color: #52796f;
   color: white;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-end;
   align-items: center;
-  padding: 0.7rem;
+  padding: 0.7rem 1.5rem;
 }
 
-ul {
+.nav ul {
   list-style-type: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.nav li {
+  margin: 0 1rem;
+}
+
+.nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.nav a:hover {
+  color: #f4f4f4;
 }
 
 .articleHeader {
-  background-color: #91c6c9;
+  background-color: #52796f;
   color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.7rem;
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: "Playfair Display", serif;
+  margin-bottom: 1rem;
 }
 
 .allArticles {
-  background-color: #91c6c9;
-  color: white;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   justify-content: center;
-  margin: 1rem;
+  gap: 1rem;
   padding: 1rem;
-}
-
-img {
-  width: 300px;
-  height: 150px;
+  background-color: #fff;
 }
 
 .listItems {
-  width: 300px;
-  height: 400px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
+  margin: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 300px;
+  height: auto;
+  cursor: pointer;
+  list-style: none;
+  border-color: #52796f;
+}
+
+.listItems:hover {
+  background-color: #f9f9f9;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1rem;
 }
 
 .singleArticle {
-  background-color: #91c6c9;
+  background-color: #52796f;
   color: white;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 0.7rem;
-  height: 1000px;
-  width: 500px;
+  padding: 2rem;
+  height: auto;
+  width: 100%;
+  max-width: 500px;
   border-radius: 20px;
+  margin: 1rem;
+  font-family: "Poppins", sans-serif;
 }
 
 .container {
@@ -73,13 +126,28 @@ img {
 button,
 .commentsButton {
   background-color: white;
-  color: #91c6c9;
+  color: #52796f;
   width: 100px;
   height: 35px;
   border: none;
   border-radius: 5px;
   font-weight: bold;
   margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  justify-content: center;
+}
+
+.commentsButton {
+  width: 130px;
+  height: 35px;
+  text-align: center;
+  padding: 10px;
+}
+
+button:hover,
+.commentsButton:hover {
+  background-color: #ddd;
 }
 
 .comments-container {
@@ -91,47 +159,17 @@ button,
 }
 
 .comments {
-  background-color: #91c6c9;
+  background-color: #52796f;
   color: white;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0.7rem;
+  padding: 1rem;
   margin: 0.5rem;
-  height: 400px;
-  width: 400px;
-  border-radius: 20px;
-}
-
-.commentsButton {
-  background-color: white;
-  color: #91c6c9;
-  width: 130px;
-  height: 25px;
-  border: none;
-  border-radius: 5px;
-  font-weight: bold;
-  margin-top: 10px;
-  text-align: center;
-  padding: 10px;
-}
-
-.commentsButton:hover {
-  cursor: pointer;
-}
-
-.homeButtonComment {
-  margin: 0;
-  width: auto;
   height: auto;
-}
-
-button:hover {
-  cursor: pointer;
-}
-
-li:hover {
-  cursor: pointer;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 20px;
 }
 
 .commentform {
@@ -154,8 +192,8 @@ li:hover {
   border: 1px solid #ccc;
   border-radius: 4px;
   width: 300px;
-  font-family: sans-serif;
-  color: #91c6c9;
+  font-family: Arial, sans-serif;
+  color: #333;
 }
 
 .commentform button {
@@ -166,4 +204,88 @@ li:hover {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+}
+
+.commentform button:hover {
+  background-color: #0056b3;
+}
+
+.vote-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.vote-button {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  color: #52796f;
+  width: 120px;
+  height: 35px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.vote-button:hover {
+  background-color: #ddd;
+}
+
+.vote-button .anticon {
+  margin-right: 5px;
+}
+
+.vote-button .button-label {
+  margin-left: 5px;
+}
+
+.commentsButton {
+  background-color: white;
+  color: #52796f;
+  width: 200px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.commentsButton:hover {
+  background-color: #ddd;
+}
+
+.created-at {
+  margin-top: 10px;
+}
+
+.return-link {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.return-link:hover {
+  text-decoration: underline;
+}
+
+.votes {
+  padding-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.commentsButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

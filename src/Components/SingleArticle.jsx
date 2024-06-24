@@ -3,13 +3,20 @@ import { useState, useEffect } from "react";
 import getSingleArticle from "../../utils/get-single-article";
 import { useNavigate } from "react-router-dom";
 import patchVotes from "../../utils/vote-on-articles";
+import {
+  UserOutlined,
+  MessageOutlined,
+  LikeOutlined,
+  DislikeOutlined,
+  CalendarOutlined,
+} from "@ant-design/icons";
 
 function SingleArticle() {
   const { articleId } = useParams();
   const [article, setArticle] = useState({});
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
-  const [voteChange, setVoteChange] = useState("");
+  const [voteChange, setVoteChange] = useState(false);
 
   useEffect(() => {
     getSingleArticle(articleId).then((response) => {
@@ -19,7 +26,7 @@ function SingleArticle() {
   }, [articleId]);
 
   if (isLoading) {
-    return <p>loading...</p>;
+    return <p>Loading...</p>;
   }
 
   const handleClick = (articleId) => {
@@ -36,44 +43,57 @@ function SingleArticle() {
   return (
     <div className="container">
       <div className="singleArticle">
-        <Link to="/articles">
-          <button>Return to Home</button>
+        <Link to="/articles" className="return-link">
+          Return to Home
         </Link>
         <h2>{article.title}</h2>
-        <img src={article.article_img_url} className="img" />
-        <br />
-        <b>{article.title}</b>
-        <br />
-        {article.author}
-        <br />
-        <br />
-        Topic: {article.topic}
-        <br />
-        <br />
-        {article.body}
-        <br />
-        <br />
-        <div
-          className="commentsButton"
-          onClick={() => handleClick(article.article_id)}
-        >
-          Comments: {article.comment_count}
+        <img
+          src={article.article_img_url}
+          className="article-image"
+          alt={article.title}
+        />
+        <div className="article-meta">
+          <p className="author">
+            <UserOutlined /> {article.author}
+          </p>
+          <p className="topic">Topic: {article.topic}</p>
+          <p className="body">{article.body}</p>
+          <div className="action-buttons">
+            <div className="vote-buttons">
+              <div className="vote-buttons">
+                <button
+                  className="vote-button"
+                  disabled={voteChange}
+                  onClick={() => handleVote(1)}
+                >
+                  <LikeOutlined />
+                  <span className="button-label">Like</span>
+                </button>
+                <button
+                  className="vote-button"
+                  disabled={voteChange}
+                  onClick={() => handleVote(-1)}
+                >
+                  <DislikeOutlined />
+                  <span className="button-label">Dislike</span>
+                </button>
+              </div>
+            </div>
+            <div className="votes">
+              <span>Votes: {article.votes}</span>
+            </div>
+            <div
+              className="commentsButton"
+              onClick={() => handleClick(article.article_id)}
+            >
+              <MessageOutlined /> {article.comment_count} Comments
+            </div>
+          </div>
+          <p className="created-at">
+            Created at: <CalendarOutlined />{" "}
+            {new Date(article.created_at).toDateString()}
+          </p>
         </div>
-        <br />
-        <br />
-        Created at: {new Date(article.created_at).toDateString()}
-        <br />
-        <br />
-        <button disabled={voteChange === true} onClick={() => handleVote(1)}>
-          {" "}
-          +
-        </button>
-        <p>Votes: {article.votes}</p>
-        <button disabled={voteChange === true} onClick={() => handleVote(-1)}>
-          {" "}
-          -
-        </button>
-        <br />
       </div>
     </div>
   );

@@ -1,5 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Card } from "antd";
+import {
+  UserOutlined,
+  MessageOutlined,
+  LikeOutlined,
+  CalendarOutlined,
+} from "@ant-design/icons";
 
 import getAllArticles from "../../utils/get-all-articles";
 
@@ -16,7 +23,7 @@ function AllArticles() {
   }, []);
 
   if (isLoading) {
-    return <p>loading...</p>;
+    return <p>Loading...</p>;
   }
 
   const handleClick = (articleId) => {
@@ -34,20 +41,33 @@ function AllArticles() {
               key={article.article_id}
               onClick={() => handleClick(article.article_id)}
             >
-              <img src={article.article_img_url} className="img" />
-              <br />
-              <b>{article.title}</b>
-              <br />
-              {article.author}
-              <br />
-              Topic: {article.topic}
-              <br />
-              Comments: {article.comment_count}
-              <br />
-              Votes: {article.votes}
-              <br />
-              Created at: {article.created_at}
-              <br />
+              <Card
+                title={article.title}
+                hoverable
+                cover={
+                  <img
+                    src={article.article_img_url}
+                    alt={article.title}
+                    className="img"
+                  />
+                }
+              >
+                <div className="article-details">
+                  <p>
+                    <UserOutlined /> {article.author}
+                  </p>
+                  <p>
+                    <MessageOutlined /> Comments: {article.comment_count}
+                  </p>
+                  <p>
+                    <LikeOutlined /> Votes: {article.votes}
+                  </p>
+                  <p>
+                    <CalendarOutlined /> Created at:{" "}
+                    {new Date(article.created_at).toDateString()}
+                  </p>
+                </div>
+              </Card>
             </li>
           );
         })}
